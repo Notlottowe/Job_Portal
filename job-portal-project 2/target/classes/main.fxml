@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jobportal.MainController"
+            style="-fx-background-color: #f5f6fa; -fx-padding: 16;">
+
+    <!-- ====== TOP: Title + Login/Register ====== -->
+    <top>
+        <VBox spacing="8">
+            <Label text="Simple Job Portal"
+                   style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+            <!-- Login / Register bar -->
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Name:"/>
+                <TextField fx:id="loginNameField" promptText="Your name" prefWidth="110"/>
+
+                <Label text="Email:"/>
+                <TextField fx:id="loginEmailField" promptText="email@example.com" prefWidth="150"/>
+
+                <Label text="Password:"/>
+                <PasswordField fx:id="loginPasswordField" promptText="Password" prefWidth="110"/>
+
+                <Label text="Role:"/>
+                <ComboBox fx:id="loginRoleComboBox" prefWidth="110"/>
+
+                <Button fx:id="loginButton"
+                        text="Login"
+                        onAction="#handleLogin"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+
+                <Button fx:id="registerButton"
+                        text="Register"
+                        onAction="#handleRegister"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+
+                <Button fx:id="logoutButton"
+                        text="Logout"
+                        onAction="#handleLogout"
+                        style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+
+                <Label fx:id="currentUserLabel"
+                       text="Not logged in"
+                       style="-fx-text-fill: #7f8c8d; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- Search bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Search:" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="searchField"
+                           HBox.hgrow="ALWAYS"
+                           promptText="Search by title, company, location, description..."/>
+                <Button text="Search"
+                        onAction="#handleSearch"
+                        style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ====== CENTER: Jobs list + details + add job ====== -->
+    <center>
+        <HBox spacing="20" BorderPane.alignment="CENTER" >
+            <!-- Left: Job listings -->
+            <VBox spacing="10" prefWidth="430">
+                <Label text="Job Listings"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                <TableView fx:id="jobsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="titleColumn" text="Title" prefWidth="150"/>
+                        <TableColumn fx:id="companyColumn" text="Company" prefWidth="120"/>
+                        <TableColumn fx:id="locationColumn" text="Location" prefWidth="90"/>
+                        <TableColumn fx:id="salaryColumn" text="Salary" prefWidth="90"/>
+                        <TableColumn fx:id="typeColumn" text="Type" prefWidth="90"/>
+                    </columns>
+                </TableView>
+
+                <HBox spacing="10">
+                    <Button text="Apply"
+                            onAction="#handleApplyJob"
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+                    <Button text="Delete"
+                            onAction="#handleDeleteJob"
+                            style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+                </HBox>
+            </VBox>
+
+            <!-- Right: Details + Add job -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Job Details"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                <TextArea fx:id="jobDetailsArea"
+                          editable="false"
+                          wrapText="true"
+                          prefRowCount="8"
+                          VBox.vgrow="ALWAYS"
+                          promptText="Select a job from the list to see its details..."/>
+
+                <Separator/>
+
+                <Label text="Post a New Job"
+                       style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                <GridPane hgap="8" vgap="6">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="90"/>
+                        <ColumnConstraints prefWidth="220" hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Title:" GridPane.rowIndex="0"/>
+                    <TextField fx:id="titleField"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="1"
+                               promptText="Job title"/>
+
+                    <Label text="Company:" GridPane.rowIndex="1"/>
+                    <TextField fx:id="companyField"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="1"
+                               promptText="Company name"/>
+
+                    <Label text="Location:" GridPane.rowIndex="2"/>
+                    <TextField fx:id="locationField"
+                               GridPane.rowIndex="2"
+                               GridPane.columnIndex="1"
+                               promptText="City, State"/>
+
+                    <Label text="Salary:" GridPane.rowIndex="3"/>
+                    <TextField fx:id="salaryField"
+                               GridPane.rowIndex="3"
+                               GridPane.columnIndex="1"
+                               promptText="e.g. 90000"/>
+
+                    <Label text="Type:" GridPane.rowIndex="4"/>
+                    <ComboBox fx:id="typeComboBox"
+                              GridPane.rowIndex="4"
+                              GridPane.columnIndex="1"
+                              promptText="Select job type"/>
+
+                    <Label text="Description:" GridPane.rowIndex="5"/>
+                    <TextArea fx:id="descriptionField"
+                              GridPane.rowIndex="5"
+                              GridPane.columnIndex="1"
+                              prefRowCount="3"
+                              wrapText="true"
+                              promptText="Short description of the role"/>
+                </GridPane>
+
+                <Button text="Add Job"
+                        onAction="#handleAddJob"
+                        style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

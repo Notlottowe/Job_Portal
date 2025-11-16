@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jobportal.RegisterController"
+            style="-fx-background-color: linear-gradient(to bottom,#f5f6fa,#dcdde1); -fx-padding: 24;">
+
+    <center>
+        <VBox spacing="16" alignment="CENTER">
+            <Label text="Job Portal"
+                   style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+            <VBox spacing="10" maxWidth="380"
+                  style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian,#bdc3c7,10,0.5,0,2);">
+                <Label text="Register"
+                       style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+
+                <Label text="Full Name"/>
+                <TextField fx:id="nameField" promptText="Your full name"/>
+
+                <Label text="Email"/>
+                <TextField fx:id="emailField" promptText="you@example.com"/>
+
+                <Label text="Password"/>
+                <PasswordField fx:id="passwordField" promptText="Password"/>
+
+                <Label text="Confirm Password"/>
+                <PasswordField fx:id="confirmPasswordField" promptText="Confirm password"/>
+
+                <Label text="Role"/>
+                <ComboBox fx:id="roleComboBox" promptText="Select role"/>
+
+                <HBox spacing="10">
+                    <Button text="Back to Login"
+                            onAction="#backToLogin"
+                            style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-background-radius: 4;"/>
+                    <Button text="Register"
+                            fx:id="registerButton"
+                            onAction="#handleRegister"
+                            HBox.hgrow="ALWAYS"
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
